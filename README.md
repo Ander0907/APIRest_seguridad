@@ -1,7 +1,11 @@
 # APIRest_seguridad
+
+Estudiante: Anderson Zapata Bedoya.
 En este repositorio está almacenada una API REST con base de datos MYSQL almacenada en Docker.
 
+
 Comando docker utilizado: docker run --name sqldb -d -p 3307:3306 --rm -v mysqldata:/var/lib/mysql -e MYSQL_ROOT_PASSWORD='test' mysql:latest
+
 
 Comandos de creación SQL (tabla y base de datos):
 
