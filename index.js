@@ -3,6 +3,8 @@ import cors from "cors";
 import rateLimit from "express-rate-limit";  
 import appRouter from "./routes/index.js";
 import "./db/index.js";
+const helmet = require('helmet');
+const session = require('express-session');
 import { connectToDatabase } from "./db/index.js";
 
 const app = express();
@@ -10,6 +12,7 @@ const app = express();
 //#region middlewares
 app.use(express.json());
 
+app.use(helmet());
 app.use(cors());  // Habilitar CORS para todas las rutas
 
 
@@ -20,6 +23,15 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
+
+// Configuración de sesiones
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Configúralo a true si usas HTTPS
+  }));
+
 app.use("/api/v1/products", appRouter);
 //#endregion
 
